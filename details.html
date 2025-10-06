@@ -1,1 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - MB Dewatering</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
+        :root {
+            --primary: #1a5276;
+            --secondary: #3498db;
+            --accent: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1600x900/?gallery,water');
+            background-size: cover;
+            background-position: center;
+            padding: 150px 0 80px;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        /* Image Slider */
+        .slider-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto 50px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 500px;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .slider-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+
+        .slider-btn:hover {
+            background-color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            margin: 0 15px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: var(--primary);
+        }
+
+        /* Thumbnail Gallery */
+        .thumbnail-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 50px;
+        }
+
+        .thumbnail {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 150px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .thumbnail:hover {
+            transform: translateY(-5px);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .thumbnail.active::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(52, 152, 219, 0.5);
+            border: 3px solid var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .slider {
+                height: 400px;
+            }
+            
+            .thumbnail-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 0;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: left 0.3s;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .slider {
+                height: 300px;
+            }
+            
+            .thumbnail-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .slider {
+                height: 250px;
+            }
+            
+            .thumbnail-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">MB <span>DEWATERING</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="fade-in">Our Gallery</h1>
+            <p class="fade-in">Explore our projects and see our dewatering services in action</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Project Showcase</h2>
+                <p>A visual journey through our dewatering projects and services</p>
+            </div>
+
+            <!-- Image Slider -->
+            <div class="slider-container">
+                <div class="slider" id="slider">
+                    <!-- Slides will be added by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Slider Controls -->
+            <div class="slider-controls">
+                <button class="slider-btn" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="slider-dots" id="sliderDots">
+                    <!-- Dots will be added by JavaScript -->
+                </div>
+                <button class="slider-btn" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Thumbnail Gallery -->
+            <div class="thumbnail-gallery" id="thumbnailGallery">
+                <!-- Thumbnails will be added by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>MB Dewatering</h3>
+                    <p>We cover all aspects of the life cycle of a dewatering project, from dewatering to industrial cleaning, with expertise and precision.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="index.html#services">Dewatering</a></li>
+                        <li><a href="index.html#services">Dam Cleaning</a></li>
+                        <li><a href="index.html#services">De-sludging</a></li>
+                        <li><a href="index.html#services">Industrial Cleaning</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 3563 Tshepong, Phase 3, Ironside, Gauteng, 1984</p>
+                    <p><i class="fas fa-phone"></i> 066 383 1882</p>
+                    <p><i class="fas fa-envelope"></i> khadamohapi@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MB Dewatering. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Gallery Data - 25 images with captions
+        const galleryImages = [
+            { src: 'nono3', caption: 'Dewatering at Construction Site' },
+            { src: 'nono5', caption: 'High-Capacity Pump in Action' },
+            { src: 'nono7', caption: 'Dam Cleaning Project' },
+            { src: 'nono8', caption: 'Sludge Removal Operation' },
+            { src: 'nono9', caption: 'Industrial Cleaning Service' },
+            { src: 'nono10', caption: 'Mining Site Dewatering' },
+            { src: 'nono15', caption: 'Canal Cleaning Project' },
+            { src: 'nono16', caption: 'Water Management Solution' },
+            { src: 'nono17', caption: 'Pipeline Installation' },
+            { src: 'nono20', caption: 'Excavation Site Dewatering' },
+            { src: 'nono21', caption: 'Trench Dewatering' },
+            { src: 'nono22', caption: 'Flood Control Measures' },
+            { src: 'nono23', caption: 'Sediment Removal' },
+            { src: 'nono24', caption: 'Water Treatment Process' },
+            { src: 'nono25', caption: 'Pond Cleaning Service' },
+            { src: 'nono11', caption: 'Drainage System Installation' },
+            { src: 'nono12', caption: 'Submersible Pump Operation' },
+            { src: 'nono13', caption: 'Construction Site Preparation' },
+            { src: 'nono14', caption: 'Water Extraction Process' },
+            { src: 'nono1', caption: 'Environmental Protection' },
+            { src: 'nono2', caption: 'Sump Cleaning Operation' },
+            { src: 'nono4', caption: 'Water Control System' },
+            { src: 'nono6', caption: 'Industrial Equipment' },
+            { src: 'nono27', caption: 'Water Engineering Project' },
+            { src: 'nono14', caption: 'Our Professional Team' }
+        ];
+
+        // Initialize Gallery
+        const slider = document.getElementById('slider');
+        const sliderDots = document.getElementById('sliderDots');
+        const thumbnailGallery = document.getElementById('thumbnailGallery');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let currentSlide = 0;
+
+        // Create slides, dots, and thumbnails
+        galleryImages.forEach((image, index) => {
+            // Create slide
+            const slide = document.createElement('div');
+            slide.className = 'slide';
+            slide.innerHTML = `
+                <img src="${image.src}" alt="${image.caption}">
+                <div class="slide-caption">${image.caption}</div>
+            `;
+            slider.appendChild(slide);
+
+            // Create dot
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            sliderDots.appendChild(dot);
+
+            // Create thumbnail
+            const thumbnail = document.createElement('div');
+            thumbnail.className = 'thumbnail';
+            if (index === 0) thumbnail.classList.add('active');
+            thumbnail.innerHTML = `<img src="${image.src}" alt="${image.caption}">`;
+            thumbnail.addEventListener('click', () => goToSlide(index));
+            thumbnailGallery.appendChild(thumbnail);
+        });
+
+        // Navigation functions
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateSlider();
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % galleryImages.length;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + galleryImages.length) % galleryImages.length;
+            updateSlider();
+        }
+
+        function updateSlider() {
+            // Update slider position
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+            
+            // Update thumbnails
+            document.querySelectorAll('.thumbnail').forEach((thumbnail, index) => {
+                thumbnail.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        // Auto slide every 5 seconds
+        let slideInterval = setInterval(nextSlide, 5000);
+
+        // Pause auto-slide on hover
+        slider.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 5000);
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        });
+
+        // Add animation to elements when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with fade-in class
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
