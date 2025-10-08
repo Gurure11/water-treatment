@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -10,14 +10,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #1a5276;
-      --secondary: #3498db;
-      --accent: #f39c12;
-      --light: #ecf0f1;
+      --primary: #32cd32; /* Lime Green */
+      --secondary: #90ee90; /* Light Lime Green */
+      --accent: #ffd700; /* Gold */
+      --light: #f0fff0; /* Honeydew */
       --dark: #2c3e50;
       --text: #333;
       --success: #27ae60;
       --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      --gold-gradient: linear-gradient(135deg, var(--accent) 0%, #ffec8b 100%);
       --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       --glass: rgba(255, 255, 255, 0.1);
     }
@@ -32,7 +33,7 @@
       font-family: 'Poppins', sans-serif;
       line-height: 1.6;
       color: var(--text);
-      background: linear-gradient(180deg, #f7fbff, #eef6fb);
+      background: linear-gradient(180deg, #f7fff7, #f0fff0);
       overflow-x: hidden;
     }
     
@@ -124,13 +125,13 @@
       border-radius: 50px;
       text-decoration: none;
       font-weight: 600;
-      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+      box-shadow: 0 4px 15px rgba(50, 205, 50, 0.3);
       transition: all 0.3s;
     }
     
     .cta:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+      box-shadow: 0 8px 20px rgba(50, 205, 50, 0.4);
     }
     
     /* Mobile Menu */
@@ -255,14 +256,14 @@
       border-radius: 20px;
       font-weight: 600;
       animation: bob 4s ease-in-out infinite;
-      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+      box-shadow: 0 4px 15px rgba(50, 205, 50, 0.3);
     }
     
     .mascot .face {
       width: 120px;
       height: 120px;
       border-radius: 50%;
-      background: var(--gradient);
+      background: var(--gold-gradient);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -531,12 +532,12 @@
       color: white;
       text-decoration: none;
       transition: all 0.3s;
-      box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+      box-shadow: 0 4px 10px rgba(50, 205, 50, 0.3);
     }
     
     .social-icons a:hover {
       transform: translateY(-5px) scale(1.1);
-      box-shadow: 0 8px 15px rgba(52, 152, 219, 0.4);
+      box-shadow: 0 8px 15px rgba(50, 205, 50, 0.4);
     }
     
     .map {
@@ -619,7 +620,7 @@
       position: absolute;
       width: 20px;
       height: 20px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(50, 205, 50, 0.3);
       border-radius: 50%;
       animation: drop 8s infinite linear;
       z-index: 0;
@@ -640,6 +641,15 @@
         transform: translateY(100vh) scale(1.2);
         opacity: 0;
       }
+    }
+    
+    /* Gold Accents */
+    .gold-accent {
+      color: var(--accent);
+    }
+    
+    .gold-border {
+      border: 2px solid var(--accent);
     }
     
     /* Responsive */
